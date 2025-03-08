@@ -1,20 +1,52 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
 
-const initialState = [
+export interface TaskState {
+  id?: string;
+  title: string;
+  description: string;
+}
+
+const initialState: TaskState[] = [
   {
-    name: "Task 1",
-    description: "Description task 1",
+    id: "1",
+    title: "Task 1",
+    description: "Task one description",
   },
   {
-    name: "Task 2",
-    description: "Description task 2",
+    id: "2",
+    title: "Task 2",
+    description: "Task two description",
   },
 ];
 
-export const TaskSlice = createSlice({
+export const taskSlice = createSlice({
   name: "tasks",
   initialState,
-  reducers: {},
+  reducers: {
+    addTask: (state, action: PayloadAction<TaskState>) => {
+      state.push(action.payload);
+    },
+    deleteTask: (state, action: PayloadAction<string>) => {
+      const taskFound = state.find((task) => task.id === action.payload);
+      if (taskFound) {
+        state.splice(state.indexOf(taskFound), 1);
+      }
+    },
+    editTask: (state, action: PayloadAction<TaskState>) => {
+      const { id, title, description } = action.payload;
+
+      const foundTask = state.find((task) => task.id === id);
+      if (foundTask) {
+        foundTask.title = title;
+        foundTask.description = description;
+      }
+    },
+  },
 });
 
-export default TaskSlice.reducer;
+export const { addTask, deleteTask, editTask } = taskSlice.actions;
+
+export const selectTask = (state: RootState) => state.tasks;
+
+export default taskSlice.reducer;
