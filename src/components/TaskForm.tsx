@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import type { TypedUseSelectorHook } from "react-redux";
-import { addTask, editTask, TaskState } from "../features/tasks/taskSlice";
+// import type { TypedUseSelectorHook } from "react-redux";
+import { addTask, editTask } from "../features/tasks/taskSlice";
 import { v4 as uuid } from "uuid";
 import { useNavigate, useParams } from "react-router-dom";
-import type { AppDispatch, AppStore, RootState } from "../app/store";
+// import type { AppDispatch, AppStore, RootState } from "../app/store";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 
 export const TaskForm = () => {
@@ -52,7 +52,8 @@ export const TaskForm = () => {
   };
   useEffect(() => {
     if (params.id) {
-      setTask(tasks.find((task) => task.id === params.id));
+      const taskFound = tasks.find((task) => task.id === params.id);
+      setTask(taskFound);
     }
   }, [params.id, tasks]);
 

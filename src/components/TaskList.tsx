@@ -1,12 +1,12 @@
-import { deleteTask } from "../features/tasks/taskSlice";
+import { deleteTask, TaskState } from "../features/tasks/taskSlice";
 import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 
 export const TaskList = () => {
   const tasks = useAppSelector((state) => state.tasks);
   const dispatch = useAppDispatch();
-  const handleDelete = (id: string) => {
-    dispatch(deleteTask(id));
+  const handleDelete = (task: TaskState) => {
+    dispatch(deleteTask(task));
   };
   return (
     <div className="w-4/6 ">
@@ -32,7 +32,7 @@ export const TaskList = () => {
                   Edit
                 </Link>
                 <button
-                  onClick={() => handleDelete(task.id)}
+                  onClick={() => handleDelete(task)}
                   className="bg-red-500 px-2 py-1 text-xs rounded-md cursor-pointer"
                 >
                   Delete
