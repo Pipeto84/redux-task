@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import type { TypedUseSelectorHook } from "react-redux";
-import { addTask, editTask } from "../features/tasks/taskSlice";
+import { addTask, editTask, TaskState } from "../features/tasks/taskSlice";
 import { v4 as uuid } from "uuid";
 import { useNavigate, useParams } from "react-router-dom";
 // import type { AppDispatch, AppStore, RootState } from "../app/store";
@@ -12,13 +12,7 @@ export const TaskForm = () => {
   const params = useParams();
   const tasks = useAppSelector((state) => state.tasks);
 
-  interface IUser {
-    id?: string;
-    title: string;
-    description: string;
-  }
-
-  const [task, setTask] = useState<IUser>({
+  const [task, setTask] = useState<TaskState>({
     title: "",
     description: "",
   });
@@ -55,7 +49,7 @@ export const TaskForm = () => {
       const taskFound = tasks.find((task) => task.id === params.id);
       setTask(taskFound);
     }
-  }, [params.id, tasks]);
+  }, [params.id,tasks]);
 
   return (
     <form
