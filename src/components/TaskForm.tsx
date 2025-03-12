@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-// import type { TypedUseSelectorHook } from "react-redux";
 import { addTask, editTask, TaskState } from "../features/tasks/taskSlice";
 import { v4 as uuid } from "uuid";
 import { useNavigate, useParams } from "react-router-dom";
-// import type { AppDispatch, AppStore, RootState } from "../app/store";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 
 export const TaskForm = () => {
