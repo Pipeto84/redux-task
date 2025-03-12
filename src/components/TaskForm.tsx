@@ -8,9 +8,9 @@ import { useAppSelector, useAppDispatch } from "../app/hooks";
 
 export const TaskForm = () => {
   const dispatch = useAppDispatch();
+  const tasks = useAppSelector((state) => state.tasks);
   const navigate = useNavigate();
   const params = useParams();
-  const tasks = useAppSelector((state) => state.tasks);
 
   const [task, setTask] = useState<TaskState>({
     title: "",
@@ -49,7 +49,7 @@ export const TaskForm = () => {
       const taskFound = tasks.find((task) => task.id === params.id);
       setTask(taskFound);
     }
-  }, [params.id,tasks]);
+  }, []);
 
   return (
     <form
