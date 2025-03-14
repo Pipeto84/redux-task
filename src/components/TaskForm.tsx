@@ -45,9 +45,11 @@ export const TaskForm = () => {
   useEffect(() => {
     if (params.id) {
       const taskFound = tasks.find((task) => task.id === params.id);
-      setTask(taskFound);
+      if (taskFound) {
+        setTask(taskFound);
+      }
     }
-  }, []);
+  }, [params.id, tasks]);
 
   return (
     <form
